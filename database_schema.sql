@@ -1,0 +1,64 @@
+DROP TABLE IF EXISTS Characters;
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Guilds;
+DROP TABLE IF EXISTS SpecialAttributes;
+DROP TABLE IF EXISTS PartyUsers;
+
+
+
+CREATE TABLE User(
+    usernameID VARCHAR(30) Unique primary key, 
+    hashedpass VARCHAR(256), 
+    -- What other info should I gather? Email? 
+    -- Discord account? 
+    
+);
+
+CREATE Table Party(
+    partyId Integer Primary key, 
+    partyName Varchar(60), 
+    partyDescription VARCHAR(1000)
+)
+
+
+-- self._kills = 0
+-- self._unconc = 0
+-- self._deaths = 0
+-- self._final_kills = 0
+-- self._max_damage_dealt = 0
+-- self._healing_dealt = 0
+-- self._crit_success = 0
+-- self._crit_fail = 0
+CREATE TABLE Characters(
+    characterId Integer Primary key,
+    characterName Varchar(30),
+    party Integer, 
+    userOwner Integer,
+    -- Do I want any info on character < Bio / Age / Race / PhotoUrl / etc. > ??? 
+    kills Integer,
+    unconcious Integer,
+    deaths Integer, 
+    finalKills Integer,
+    damage_dealt Integer,
+    max_damage_dealt Integer,
+    healing_dealt Integer,
+    critical_success Integer, 
+    critical_fail Integer,
+    Foreign Key party REFERENCES Party(partyId), 
+    Foreign Key userOwner REFERENCES Users(UsernameID)
+);
+
+CREATE TABLE SpecialAttributes(
+    characterId Integer, 
+    specialAttributeName Varchar(30), 
+    specialAttributeValue Integer, 
+    Foreign Key characterId REFERENCES Characters(characterId)
+    Primary Key (characterId, specialAttributeName)
+);
+
+CREATE TABLE PartyUsers(
+    UsernameID Integer, 
+    partyId Integer, 
+    -- Do I want any fun things like "Name, Status"
+);
+
