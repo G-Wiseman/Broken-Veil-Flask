@@ -11,7 +11,7 @@ CREATE TABLE User(
     hashedpass VARCHAR(256), 
     -- What other info should I gather? Email? 
     -- Discord account? 
-    
+    -- Profile Picture? 
 );
 
 CREATE Table Party(
@@ -59,6 +59,7 @@ CREATE TABLE SpecialAttributes(
 CREATE TABLE PartyUsers(
     UsernameID Integer, 
     partyId Integer, 
-    -- Do I want any fun things like "Name, Status"
+    -- Do I want any fun things like "Title?, Status?, sessions played?"
+    -- I'm not actually sure that sessions played would be a good fit for this 
 );
 
