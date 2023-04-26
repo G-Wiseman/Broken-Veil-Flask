@@ -1,7 +1,9 @@
+from multiprocessing import connection
 import sqlite3
 
 import click
 from flask import current_app, g
+import json
 
 
 def get_db():
@@ -18,7 +20,6 @@ def get_db():
 
 def close_db(e=None):
     db = g.pop('db', None)
-
     if db is not None:
         db.close()
 
@@ -38,3 +39,10 @@ def init_db_command():
 def init_app(app):
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
+
+def queryDbJson(db, query):
+    # db is a sqlite Connection Object. 
+    data = db.execute(query).fetchall()
+    jdata = [dict(row) for row in data]
+    return json.dumps(jdata)
+
