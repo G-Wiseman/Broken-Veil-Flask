@@ -1,0 +1,29 @@
+GET /parties: 
+// Returns a list of all parties the authenticated user has access to. This endpoint should only return parties that the user is authorized to access.
+
+POST /parties: 
+// Creates a new party owned by the authenticated user. The request body should include the name and any other relevant information about the party.
+
+GET /parties/{partyId}: 
+// Returns the details of the specified party, if the authenticated user has access to it.
+
+PUT /parties/{partyId}: 
+// Updates the details of the specified party, if the authenticated user is the owner of the party. The request body should include the updated information about the party.
+
+DELETE /parties/{partyId}: 
+// Deletes the specified party, if the authenticated user is the owner of the party.
+
+GET /parties/{partyId}/characters: 
+// Returns a list of all characters in the specified party. This endpoint should only return characters for parties that the user is authorized to access.
+
+GET /parties/{partyId}/characters/{characterId}: 
+// Returns the details of a specific character in the specified party. This endpoint should only return character information for parties that the user is authorized to access.
+
+POST /parties/{partyId}/characters: 
+// Creates a new character and adds them to the specified party. This endpoint should only allow users to create characters in parties that they are authorized to access.
+
+PUT /parties/{partyId}/characters/{characterId}: 
+// Updates the details of an existing character in the specified party. This endpoint should only allow users to update characters in parties that they are authorized to access.
+
+DELETE /parties/{partyId}/characters/{characterId}: 
+// Deletes a character from the specified party. This endpoint should only allow users to delete characters in parties that they are authorized to access.

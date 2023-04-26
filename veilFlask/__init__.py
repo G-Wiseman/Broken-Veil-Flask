@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 
+# chrome://net-internals/#sockets
 
 def create_app(test_config=None):
     # create and configure the app
@@ -9,7 +10,7 @@ def create_app(test_config=None):
         # Todo: This should be something secret when the app is real. It's fine as DEV for now
         SECRET_KEY='dev',
         # Learn more about this in later sections
-        DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
+        DATABASE=os.path.join(app.instance_path, 'veilFlask.sqlite'),
     )
 
     if test_config is None:
@@ -25,7 +26,7 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-     # Add the command-line command to Flask "init-db"
+    #  Add the command-line command to Flask "init-db"
     # run "flask --app flaskr init-db" to create the instance flaskr.sqlite
     from . import db
     db.init_app(app)
@@ -34,11 +35,14 @@ def create_app(test_config=None):
     from . import auth
     app.register_blueprint(auth.bp)
 
+    from . import characterReporting as cR
+    app.register_blueprint(cR.bp)
+
+
+
     # a simple page that says hello
     @app.route('/hello')
     def hello():
         return 'Hello, World!'
-
-
 
     return app

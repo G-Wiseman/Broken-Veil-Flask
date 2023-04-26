@@ -1,12 +1,12 @@
 DROP TABLE IF EXISTS Characters;
 DROP TABLE IF EXISTS Users;
-DROP TABLE IF EXISTS Guilds;
+DROP TABLE IF EXISTS Parties;
 DROP TABLE IF EXISTS SpecialAttributes;
 DROP TABLE IF EXISTS PartyUsers;
 
 
 
-CREATE TABLE User(
+CREATE TABLE Users(
     usernameID VARCHAR(30) Unique primary key, 
     hashedpass VARCHAR(256), 
     -- What other info should I gather? Email? 
@@ -14,7 +14,7 @@ CREATE TABLE User(
     -- Profile Picture? 
 );
 
-CREATE Table Party(
+CREATE Table Parties(
     partyId Integer Primary key, 
     partyName Varchar(60), 
     partyDescription VARCHAR(1000)
@@ -57,8 +57,12 @@ CREATE TABLE SpecialAttributes(
 );
 
 CREATE TABLE PartyUsers(
-    UsernameID Integer, 
+    usernameId Integer, 
     partyId Integer, 
+    privilege Integer,
+    Foreign Key UsernameID REFERENCES Users(usernameID),
+    Foreign Key partyId REFERENCES Parties(partyId),
+    Primary Key (usernameId, partyId)
     -- Do I want any fun things like "Title?, Status?, sessions played?"
     -- I'm not actually sure that sessions played would be a good fit for this 
 );
