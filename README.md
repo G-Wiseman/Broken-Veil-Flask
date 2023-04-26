@@ -3,4 +3,3 @@ A work in progress Flask-React-Sqlite WebApp. An attempt to take the concept of 
 
 This project WILL be the backend API for my front-end project "Veil-React"
 
-Bear with me as I attempt my first "real" API project. 
