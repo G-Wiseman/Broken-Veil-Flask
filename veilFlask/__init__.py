@@ -27,7 +27,7 @@ def create_app(test_config=None):
         pass
 
     #  Add the command-line command to Flask "init-db"
-    # run "flask --app flaskr init-db" to create the instance flaskr.sqlite
+    # run "flask --app veilFlask init-db" to create the instance flaskr.sqlite
     from . import db
     db.init_app(app)
 
