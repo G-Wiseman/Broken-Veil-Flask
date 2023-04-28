@@ -1,5 +1,6 @@
 # Most of this code is from the Flask Documentation Tutorial. Not in use right now... 
-
+# I'm going to use it as a skeleton to build my actual authentication off of, 
+# But right now it's not much. 
 
 import functools
 
@@ -13,7 +14,7 @@ from veilFlask.db import get_db
 # This bp is what we'll be using for the decorators. It has been "registered in the app factory"
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
-@bp.route('/register', methods=['GET', 'POST'])
+@bp.route('/register', methods=['POST'])
 def register():
     if request.method == 'POST':
         username = request.form['username']
