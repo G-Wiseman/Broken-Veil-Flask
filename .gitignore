@@ -9,7 +9,7 @@ __pycache__/
 # Other Files I want to ignore
 BrokenVeilFlaskVenv/
 *.DS_Store
-
+/Tests
 
 
 
