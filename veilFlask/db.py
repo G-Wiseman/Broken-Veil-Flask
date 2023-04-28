@@ -40,9 +40,9 @@ def init_app(app):
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
 
-def queryDbJson(db, query):
+def queryDbJson(db, query, params=None):
     # db is a sqlite Connection Object. 
-    data = db.execute(query).fetchall()
+    data = db.execute(query, params).fetchall()
     jdata = [dict(row) for row in data]
     return json.dumps(jdata)
 
