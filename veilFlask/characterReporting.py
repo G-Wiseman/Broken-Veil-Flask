@@ -13,6 +13,7 @@ bp = Blueprint('gameinfo', __name__, url_prefix='/gameinfo')
 @bp.route("/parties", methods=["GET"])
 def getParties():
     db = get_db()
+    # Check that the user actually has access to view this party. 
     query = "Select * from Parties"
     return queryDbJson(db, query)
     # Returns a list of all parties the authenticated user has access to. This endpoint should only return parties that the user is authorized to access.
@@ -26,6 +27,7 @@ def createNewParty():
 @bp.route("/parties/<partyID>", methods=['GET'])
 def getPartybyId(partyID):
     db = get_db()
+    # TODO: Figure out if the user is actually allowed to access this partyId
     query = "Select * from Parties where partyId= ?;"
     return queryDbJson(db, query, (partyID,))
 
@@ -42,26 +44,32 @@ def deletePartybyID(partyID):
 
 @bp.route("/parties/<partyID>/characters", methods=["GET"])
 def getCharactersbyParty(partyID):
+    # TODO: Need to check that they actually belong to this partyId
     db = get_db()
     query = "select characters.* from parties join characters using (partyId) where partyId = ?;"
     return queryDbJson(db, query, (partyID,))
      
-
+# TODO: 
 @bp.route("/parties/<partyID>/characters", methods=["POST"])
 def updateCharactersbyParty(partyID):
     return f"A JSON with ALL characters that belong to the party ID: {partyID}"
 
 @bp.route("parties/<partyID>/characters/<characterID>", methods=["GET"])
 def getCharacterById(partyID, characterID):
+    # TODO: Check that they actually have the permissions to view this partyId
     db = get_db()
-    query = ""
+    query = "select  characters.* from parties join characters using (partyId) where partyId = ? and characterId=?;"
     return queryDbJson(db, query, (partyID, characterID))
-    return f"Get the character info related to character{characterID} from {partyID}"
 
+# TODO: 
 @bp.route("parties/<partyID>/characters/<characterID>", methods=["POST"])
 def updateCharacterById(partyID, characterID):
     return f"Update the character info related to character{characterID} from {partyID}"
 
+
+# TODO: FINISH THE FUNCTION
 @bp.route("parties/<partyID>/characters/<characterID>", methods=["DELETE"])
 def deleteCharacterById(partyID, characterID):
-    return f"Delete the character info related to character{characterID} from {partyID}"
+    # TODO: NEED TO AUTHENTICATE that they are actually have the priviledge to delete this character
+    # Priviledges sufficient would be : - Character Owner OR - party moderator (priviledge high enough
+    db = get_db()
