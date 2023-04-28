@@ -7,16 +7,16 @@ DROP TABLE IF EXISTS PartyUsers;
 
 
 CREATE TABLE Users(
-    usernameID VARCHAR(30) Unique primary key, 
+    usernameID VARCHAR(30) Unique primary key,
     hashedpass VARCHAR(256)
-    -- What other info should I gather? Email? 
-    -- Discord account? 
-    -- Profile Picture? 
+    -- What other info should I gather? Email?
+    -- Discord account?
+    -- Profile Picture?
 );
 
 CREATE Table Parties(
-    partyId Integer Primary key, 
-    partyName Varchar(60), 
+    partyId Integer Primary key,
+    partyName Varchar(60),
     partyDescription VARCHAR(1000)
 );
 
@@ -33,39 +33,39 @@ CREATE Table Parties(
 CREATE TABLE Characters (
     characterId Integer primary key AUTOINCREMENT,
     characterName VARCHAR(30),
-    party Integer, 
+    partyId Integer,
     userOwner Integer,
-    -- Do I want any info on character < Bio / Age / Race / PhotoUrl / etc. > ??? 
+    -- Do I want any info on character < Bio / Age / Race / PhotoUrl / etc. > ???
     kills Integer,
     unconcious Integer,
-    deaths Integer, 
+    deaths Integer,
     finalKills Integer,
     damage_dealt Integer,
     max_damage_dealt Integer,
     healing_dealt Integer,
-    critical_success Integer, 
+    critical_success Integer,
     critical_fail Integer,
-    Foreign Key (party) REFERENCES Party(partyId), 
+    Foreign Key (party) REFERENCES Party(partyId),
     Foreign Key (userOwner) REFERENCES Users(UsernameID)
 
 );
 
 CREATE TABLE SpecialAttributes(
-    characterId Integer, 
-    specialAttributeName Varchar(30), 
-    specialAttributeValue Integer, 
-    Foreign Key characterId REFERENCES Characters(characterId),
+    characterId Integer,
+    specialAttributeName Varchar(30),
+    specialAttributeValue Integer,
+    Foreign Key (characterId) REFERENCES Characters(characterId),
     Primary Key (characterId, specialAttributeName)
 );
 
 CREATE TABLE PartyUsers(
-    usernameId Integer, 
-    partyId Integer, 
+    usernameId Integer,
+    partyId Integer,
     privilege Integer,
-    Foreign Key UsernameID REFERENCES Users(usernameID),
-    Foreign Key partyId REFERENCES Parties(partyId),
+    Foreign Key (UsernameID) REFERENCES Users(usernameID),
+    Foreign Key (partyId) REFERENCES Parties(partyId),
     Primary Key (usernameId, partyId)
     -- Do I want any fun things like "Title?, Status?, sessions played?"
-    -- I'm not actually sure that sessions played would be a good fit for this 
+    -- I'm not actually sure that sessions played would be a good fit for this
 );
 
