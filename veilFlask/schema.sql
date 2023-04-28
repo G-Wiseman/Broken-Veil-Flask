@@ -45,7 +45,7 @@ CREATE TABLE Characters (
     healing_dealt Integer,
     critical_success Integer,
     critical_fail Integer,
-    Foreign Key (party) REFERENCES Party(partyId),
+    Foreign Key (partyId) REFERENCES Parties(partyId),
     Foreign Key (userOwner) REFERENCES Users(UsernameID)
 
 );
