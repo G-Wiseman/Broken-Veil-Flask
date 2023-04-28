@@ -42,7 +42,10 @@ def init_app(app):
 
 def queryDbJson(db, query, params=None):
     # db is a sqlite Connection Object. 
-    data = db.execute(query, params).fetchall()
+    if params is not None:
+        data = db.execute(query, params).fetchall()
+    else:
+        data = db.execute(query).fetchall()
     jdata = [dict(row) for row in data]
     return json.dumps(jdata)
 
